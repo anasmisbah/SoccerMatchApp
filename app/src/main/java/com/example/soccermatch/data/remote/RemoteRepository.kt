@@ -133,10 +133,15 @@ class RemoteRepository {
                         val result = it.events[0]
                         match.value = Match(
                             result.dateEvent,result.idAwayTeam,
-                            result.idEvent,result.idHomeTeam,result.intAwayScore,result.intHomeScore,result.strEvent,
-                            result.strAwayTeam,result.strHomeTeam,result.strAwayGoalDetails,result.strAwayRedCards,result.strAwayYellowCards,result.strAwayLineupForward,result.strAwayLineupGoalkeeper,
-                            "${result.strAwayFormation}","${result.strHomeFormation}",result.strHomeGoalDetails,result.strHomeLineupForward,
-                            result.strHomeLineupGoalkeeper,result.strHomeRedCards,result.strHomeYellowCards)
+                            result.idEvent,result.idHomeTeam,result.intAwayScore,
+                            result.intHomeScore,result.strEvent,
+                            result.strAwayTeam,result.strHomeTeam?:"-",result.strAwayGoalDetails?:"-",
+                            result.strAwayRedCards?:"-",result.strAwayYellowCards?:"-",result.strAwayLineupForward?:"-",
+                            result.strAwayLineupGoalkeeper?:"-",
+                            "${result.strAwayFormation ?:"-"}","${result.strHomeFormation?:"-"}",
+                            result.strHomeGoalDetails?:"-",result.strHomeLineupForward?:"-",
+                            result.strHomeLineupGoalkeeper?:"-",result.strHomeRedCards?:"-",
+                            result.strHomeYellowCards?:"-")
                     }
                 }
             }
