@@ -66,7 +66,6 @@ class DetailMatchActivity : AppCompatActivity() {
     }
 
     private fun setDataView(match: Match) {
-        //home
         tv_detail_home_goal.text = match.strHomeGoalDetails ?: "-"
         tv_detail_home_redcard.text = match.strHomeRedCards ?: "-"
         tv_detail_home_yllowcard.text = match.strHomeYellowCards ?: "-"
@@ -74,7 +73,6 @@ class DetailMatchActivity : AppCompatActivity() {
         tv_detail_home_forward.text = match.strHomeLineupForward ?: "-"
         tv_detail_home_formation.text = "${match.strHomeFormation ?: "-"}"
 
-        //away
         tv_detail_away_goal.text = match.strAwayGoalDetails ?: "-"
         tv_detail_away_redcard.text = match.strAwayRedCards ?: "-"
         tv_detail_away_yllowcard.text = match.strAwayYellowCards ?: "-"
