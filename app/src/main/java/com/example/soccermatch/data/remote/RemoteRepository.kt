@@ -8,6 +8,7 @@ import com.example.soccermatch.data.local.entity.Match
 import com.example.soccermatch.data.local.entity.Team
 import com.example.soccermatch.data.remote.response.*
 import com.example.soccermatch.utils.DataDummy
+import com.example.soccermatch.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -176,7 +177,7 @@ class RemoteRepository {
 
     fun searchMatch(dataSearch:String): LiveData<List<Match>>{
         val matches = MutableLiveData<List<Match>>()
-
+        EspressoIdlingResource.increment()
         apiClient.searchMatch(dataSearch).enqueue(
             object : Callback<SearchMatchResponse>{
                 override fun onFailure(call: Call<SearchMatchResponse>, t: Throwable) {
@@ -193,6 +194,7 @@ class RemoteRepository {
                             Match(event.dateEvent,event.idAwayTeam,event.idEvent,event.idHomeTeam,event.intAwayScore,event.intHomeScore,event.strEvent,event.strAwayTeam,event.strHomeTeam)
                         }
                     }
+                    EspressoIdlingResource.decrement()
                 }
 
             }
