@@ -7,15 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.request.RequestOptions
 import com.example.soccermatch.R
 import com.example.soccermatch.data.local.entity.League
 import com.example.soccermatch.ui.league.match.MatchFragment
-import com.example.soccermatch.ui.league.nextmatch.NextMatchFragment
-import com.example.soccermatch.ui.league.previousmatch.PreviousMatchFragment
 import com.example.soccermatch.ui.league.standings.StandingsFragment
 import com.example.soccermatch.ui.league.teams.TeamFragment
 import com.example.soccermatch.ui.match.search.SearchMatchActivity
@@ -37,7 +34,7 @@ class DetailLeagueActivity : AppCompatActivity() {
         setSupportActionBar(league_toolbar)
         supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        var ct : CollapsingToolbarLayout = findViewById<View>(R.id.detailCollapsingToolbar) as CollapsingToolbarLayout
+        val ct : CollapsingToolbarLayout = findViewById<View>(R.id.detailCollapsingToolbar) as CollapsingToolbarLayout
         ct.setExpandedTitleColor(Color.TRANSPARENT)
         ct.setCollapsedTitleTextColor(Color.WHITE)
 

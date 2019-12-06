@@ -18,7 +18,6 @@ import com.example.soccermatch.ui.match.DetailMatchActivity
 import com.example.soccermatch.utils.EXTRA_MATCH
 import com.example.soccermatch.utils.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_match.*
-import kotlinx.android.synthetic.main.fragment_next_match.*
 
 /**
  * A simple [Fragment] subclass.

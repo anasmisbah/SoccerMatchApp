@@ -9,7 +9,7 @@ import com.example.soccermatch.data.local.entity.Match
 import kotlinx.android.synthetic.main.item_match.view.*
 
 class LeagueMatchAdapter internal constructor(
-    val listener: (Match) -> Unit
+    private val listener: (Match) -> Unit
 ) : RecyclerView.Adapter<LeagueMatchAdapter.LeagueMatchViewHolder>(){
 
     private var matches = emptyList<Match>()

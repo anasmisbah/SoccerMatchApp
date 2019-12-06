@@ -13,7 +13,7 @@ import com.example.soccermatch.utils.GlideApp
 import kotlinx.android.synthetic.main.item_team.view.*
 
 class TeamAdapter internal constructor(
-    val listener: (Team, ImageView) -> Unit
+    private val listener: (Team, ImageView) -> Unit
 ) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>(){
 
     private var teams = emptyList<Team>()

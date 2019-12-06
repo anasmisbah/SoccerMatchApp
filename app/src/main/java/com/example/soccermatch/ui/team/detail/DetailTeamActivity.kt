@@ -45,34 +45,34 @@ class DetailTeamActivity : AppCompatActivity() {
             .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
             .into(detail_team_img_badge)
         val teams = ArrayList<String>()
-        teamIntent?.strTeamBanner?.let {
+        teamIntent.strTeamBanner?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamBadge?.let {
+        teamIntent.strTeamBadge.let {
             teams.add(it)
         }
-        teamIntent?.strStadiumThumb?.let {
+        teamIntent.strStadiumThumb?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamLogo?.let {
+        teamIntent.strTeamLogo?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamFanart1?.let {
+        teamIntent.strTeamFanart1?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamFanart2?.let {
+        teamIntent.strTeamFanart2?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamFanart3?.let {
+        teamIntent.strTeamFanart3?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamFanart4?.let {
+        teamIntent.strTeamFanart4?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamBanner?.let {
+        teamIntent.strTeamBanner?.let {
             teams.add(it)
         }
-        teamIntent?.strTeamJersey?.let {
+        teamIntent.strTeamJersey?.let {
             teams.add(it)
         }
 
@@ -86,7 +86,7 @@ class DetailTeamActivity : AppCompatActivity() {
         }
 
         detail_team_img_yt.setOnClickListener {
-            teamIntent?.strYoutube?.let {
+            teamIntent.strYoutube.let {
                 val webPage: Uri = Uri.parse("https://$it")
                 val intentYoutube = Intent(Intent.ACTION_VIEW,webPage)
                 startActivity(intentYoutube)
@@ -94,7 +94,7 @@ class DetailTeamActivity : AppCompatActivity() {
         }
 
         detail_team_img_fb.setOnClickListener {
-            teamIntent?.strFacebook?.let {
+            teamIntent.strFacebook.let {
                 val webPage: Uri = Uri.parse("https://$it")
                 val intentFacebook = Intent(Intent.ACTION_VIEW,webPage)
                 startActivity(intentFacebook)
@@ -102,7 +102,7 @@ class DetailTeamActivity : AppCompatActivity() {
         }
 
         detail_team_img_twt.setOnClickListener {
-            teamIntent?.strTwitter?.let {
+            teamIntent.strTwitter.let {
                 val webPage: Uri = Uri.parse("https://$it")
                 val intentTwitter = Intent(Intent.ACTION_VIEW,webPage)
                 startActivity(intentTwitter)
@@ -110,7 +110,7 @@ class DetailTeamActivity : AppCompatActivity() {
         }
 
         detail_team_img_ig.setOnClickListener {
-            teamIntent?.strInstagram?.let {
+            teamIntent.strInstagram?.let {
                 val webPage: Uri = Uri.parse("https://$it")
                 val intentInstagram = Intent(Intent.ACTION_VIEW,webPage)
                 startActivity(intentInstagram)

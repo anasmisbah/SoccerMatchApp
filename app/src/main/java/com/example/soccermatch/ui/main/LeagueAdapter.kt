@@ -10,7 +10,7 @@ import com.example.soccermatch.data.local.entity.League
 import kotlinx.android.synthetic.main.item_league.view.*
 
 class LeagueAdapter  internal constructor(
-    val listener: (League,ImageView) -> Unit
+    private val listener: (League,ImageView) -> Unit
 ) : RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>(){
 
     private var leagues = emptyList<League>()
