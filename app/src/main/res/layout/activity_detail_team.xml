@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/imageView"
+                android:transitionName="teambadge"
+                android:id="@+id/detail_team_img_badge"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="24dp"
@@ -19,13 +20,16 @@
                 app:srcCompat="@drawable/american_mayor_league" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/detail_team_tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/detail_team_img_badge"
+            app:layout_constraintStart_toStartOf="@+id/detail_team_img_badge"
+            app:layout_constraintTop_toBottomOf="@+id/detail_team_img_badge"
             tools:text="name" />
 
         <TextView
@@ -35,8 +39,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Country"
+            android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_team_tv_name" />
 
         <TextView
             android:id="@+id/textView11"
@@ -45,11 +51,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Gender"
+            android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_team_tv_country" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/detail_team_tv_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -58,7 +66,7 @@
             tools:text="usa" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/detail_team_tv_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -73,11 +81,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Galery"
+            android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_team_tv_desc" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_team_galery"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -92,11 +102,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Sosial Media"
+            android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_team_galery" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/detail_team_img_yt"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -111,13 +123,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="description"
+            android:textColor="#000"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_team_tv_gender" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/detail_team_tv_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -127,39 +140,39 @@
             tools:text="desc" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/detail_team_img_fb"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/detail_team_img_yt"
             app:layout_constraintTop_toBottomOf="@+id/textView27"
             app:srcCompat="@drawable/facebook" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/detail_team_img_twt"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/detail_team_img_fb"
             app:layout_constraintTop_toBottomOf="@+id/textView27"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/twitter" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/detail_team_img_ig"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/detail_team_img_twt"
             app:layout_constraintTop_toBottomOf="@+id/textView27"
             app:srcCompat="@drawable/instagram" />
 

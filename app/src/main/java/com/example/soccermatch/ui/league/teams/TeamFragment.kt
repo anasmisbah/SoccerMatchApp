@@ -1,6 +1,8 @@
 package com.example.soccermatch.ui.league.teams
 
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,11 +12,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.soccermatch.R
 import com.example.soccermatch.data.UiState
 import com.example.soccermatch.ui.league.DetailLeagueViewModel
 import com.example.soccermatch.ui.team.TeamAdapter
+import com.example.soccermatch.ui.team.detail.DetailTeamActivity
+import com.example.soccermatch.utils.EXTRA_TEAM
 import com.example.soccermatch.utils.ViewModelFactory
 import com.example.soccermatch.utils.invisible
 import com.example.soccermatch.utils.visible
@@ -45,8 +50,12 @@ class TeamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val teamAdapter = TeamAdapter{
-            toast(it.strTeam)
+        val teamAdapter = TeamAdapter{team,imageView->
+            toast(team.strTeam)
+            val detailLeagueIntent = Intent(this.context, DetailTeamActivity::class.java)
+            detailLeagueIntent.putExtra(EXTRA_TEAM,team)
+            val options = ActivityOptions.makeSceneTransitionAnimation(this.activity,imageView,"teambadge")
+            startActivity(detailLeagueIntent,options.toBundle())
         }
 
         viewModel.getLeagueTeams(leagueId!!).observe(this, Observer {
@@ -71,6 +80,17 @@ class TeamFragment : Fragment() {
             setHasFixedSize(true)
             adapter = teamAdapter
         }
+
+        rv_league_team.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && fab_search_team.visibility == View.VISIBLE) {
+                    fab_search_team.hide()
+                } else if (dy < 0 && fab_search_team.visibility != View.VISIBLE) {
+                    fab_search_team.show()
+                }
+            }
+        })
     }
 
 
