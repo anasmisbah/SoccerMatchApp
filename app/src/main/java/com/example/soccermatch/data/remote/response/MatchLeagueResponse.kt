@@ -1,7 +1,7 @@
 package com.example.soccermatch.data.remote.response
 
 data class MatchLeagueResponse(
-    val events: List<EventResponse>
+    val events: List<EventResponse>?
 )
 
 data class EventResponse(

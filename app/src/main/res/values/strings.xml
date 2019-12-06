@@ -16,4 +16,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="leagues">leagues</string>
     <string name="favorites">favorites</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="total">Total</string>
+    <string name="loss">loss</string>
+    <string name="draw">Draw</string>
+    <string name="win">Win</string>
+    <string name="played">Played</string>
+    <string name="team_name">Team Name</string>
 </resources>

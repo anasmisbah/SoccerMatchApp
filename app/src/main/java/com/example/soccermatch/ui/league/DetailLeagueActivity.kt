@@ -13,8 +13,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.request.RequestOptions
 import com.example.soccermatch.R
 import com.example.soccermatch.data.local.entity.League
+import com.example.soccermatch.ui.league.match.MatchFragment
 import com.example.soccermatch.ui.league.nextmatch.NextMatchFragment
 import com.example.soccermatch.ui.league.previousmatch.PreviousMatchFragment
+import com.example.soccermatch.ui.league.standings.StandingsFragment
+import com.example.soccermatch.ui.league.teams.TeamFragment
 import com.example.soccermatch.ui.match.search.SearchMatchActivity
 import com.example.soccermatch.utils.*
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -51,10 +54,12 @@ class DetailLeagueActivity : AppCompatActivity() {
         })
 
         val fragmentAdapter = DetailViewPagerAdapter(supportFragmentManager,leagueIntent.id)
-        fragmentAdapter.addFragment(PreviousMatchFragment())
-        fragmentAdapter.addFragment(NextMatchFragment())
-        fragmentAdapter.addTitle("Previous Match")
-        fragmentAdapter.addTitle("Next Match")
+        fragmentAdapter.addFragment(MatchFragment())
+        fragmentAdapter.addFragment(StandingsFragment())
+        fragmentAdapter.addFragment(TeamFragment())
+        fragmentAdapter.addTitle("Match")
+        fragmentAdapter.addTitle("Standings")
+        fragmentAdapter.addTitle("Teams")
         detail_league_viewpager.adapter = fragmentAdapter
         detail_league_tablayout.setupWithViewPager(detail_league_viewpager)
 

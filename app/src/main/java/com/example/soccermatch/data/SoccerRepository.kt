@@ -4,10 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.soccermatch.data.local.MyDatabaseOpenHelper
-import com.example.soccermatch.data.local.entity.Favorite
-import com.example.soccermatch.data.local.entity.League
-import com.example.soccermatch.data.local.entity.Match
-import com.example.soccermatch.data.local.entity.Team
+import com.example.soccermatch.data.local.entity.*
 import com.example.soccermatch.data.remote.RemoteRepository
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -116,5 +113,13 @@ class SoccerRepository(
         }
 
         return isFavorite
+    }
+
+    override fun getLeagueStandings(leagueId: Int): LiveData<UiState<List<Standings>>> {
+        return remoteRepository.getLeagueStandings(leagueId)
+    }
+
+    override fun getLeagueTeams(leagueId: Int): LiveData<UiState<List<Team>>> {
+        return remoteRepository.getLeagueTeams(leagueId)
     }
 }

@@ -3,6 +3,7 @@ package com.example.soccermatch.data
 import androidx.lifecycle.LiveData
 import com.example.soccermatch.data.local.entity.League
 import com.example.soccermatch.data.local.entity.Match
+import com.example.soccermatch.data.local.entity.Standings
 import com.example.soccermatch.data.local.entity.Team
 
 interface SoccerDataSource {
@@ -40,4 +41,10 @@ interface SoccerDataSource {
 
     //untuk halaman detail match, check match favorite
     fun favoriteState(match: Match) : Boolean
+
+    //untuk halaman klasemen
+    fun getLeagueStandings(leagueId:Int):LiveData<UiState<List<Standings>>>
+
+    //untuk halaman team league
+    fun getLeagueTeams(leagueId: Int):LiveData<UiState<List<Team>>>
 }

@@ -3,8 +3,10 @@ package com.example.soccermatch.data.remote
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.soccermatch.data.UiState
 import com.example.soccermatch.data.local.entity.League
 import com.example.soccermatch.data.local.entity.Match
+import com.example.soccermatch.data.local.entity.Standings
 import com.example.soccermatch.data.local.entity.Team
 import com.example.soccermatch.data.remote.response.*
 import com.example.soccermatch.utils.DataDummy
@@ -50,8 +52,11 @@ class RemoteRepository {
             ) {
 
                 response.body()?.let {
-                    val result = it.leagues[0]
-                    league.value = League(result.idLeague.toInt(),result.strNaming,null,result.strDescriptionEN,result.strLogo,result.strTrophy,result.strBanner,result.intFormedYear)
+                    it.leagues?.let {item->
+                        val result = item[0]
+                        league.value = League(result.idLeague.toInt(),result.strNaming,null,result.strDescriptionEN,result.strLogo,result.strTrophy,result.strBanner,result.intFormedYear)
+                    }
+
                 }
             }
 
@@ -75,10 +80,10 @@ class RemoteRepository {
                     response: Response<MatchLeagueResponse>
                 ) {
                     response.body()?.let {
-                        val result = it.events
-
-                         matches.value =  result.map {event->
-                            Match(event.dateEvent,event.idAwayTeam,event.idEvent,event.idHomeTeam,event.intAwayScore,event.intHomeScore,event.strEvent,event.strAwayTeam,event.strHomeTeam)
+                        it.events?.let {events->
+                            matches.value =  events.map {event->
+                                Match(event.dateEvent,event.idAwayTeam,event.idEvent,event.idHomeTeam,event.intAwayScore,event.intHomeScore,event.strEvent,event.strAwayTeam,event.strHomeTeam)
+                            }
                         }
                     }
                 }
@@ -103,10 +108,10 @@ class RemoteRepository {
                     response: Response<MatchLeagueResponse>
                 ) {
                     response.body()?.let {
-                        val result = it.events
-
-                        matches.value =  result.map {event->
-                            Match(event.dateEvent,event.idAwayTeam,event.idEvent,event.idHomeTeam,event.intAwayScore,event.intHomeScore,event.strEvent,event.strAwayTeam,event.strHomeTeam)
+                        it.events?.let { events ->
+                            matches.value =  events.map {event->
+                                Match(event.dateEvent,event.idAwayTeam,event.idEvent,event.idHomeTeam,event.intAwayScore,event.intHomeScore,event.strEvent,event.strAwayTeam,event.strHomeTeam)
+                            }
                         }
                     }
                 }
@@ -131,18 +136,22 @@ class RemoteRepository {
                     response: Response<MatchLeagueResponse>
                 ) {
                     response.body()?.let {
-                        val result = it.events[0]
-                        match.value = Match(
-                            result.dateEvent,result.idAwayTeam,
-                            result.idEvent,result.idHomeTeam,result.intAwayScore,
-                            result.intHomeScore,result.strEvent,
-                            result.strAwayTeam,result.strHomeTeam?:"-",result.strAwayGoalDetails?:"-",
-                            result.strAwayRedCards?:"-",result.strAwayYellowCards?:"-",result.strAwayLineupForward?:"-",
-                            result.strAwayLineupGoalkeeper?:"-",
-                            "${result.strAwayFormation ?:"-"}","${result.strHomeFormation?:"-"}",
-                            result.strHomeGoalDetails?:"-",result.strHomeLineupForward?:"-",
-                            result.strHomeLineupGoalkeeper?:"-",result.strHomeRedCards?:"-",
-                            result.strHomeYellowCards?:"-")
+
+                        it.events?.let {events->
+                            val result = events[0]
+                            match.value = Match(
+                                result.dateEvent,result.idAwayTeam,
+                                result.idEvent,result.idHomeTeam,result.intAwayScore,
+                                result.intHomeScore,result.strEvent,
+                                result.strAwayTeam,result.strHomeTeam?:"-",result.strAwayGoalDetails?:"-",
+                                result.strAwayRedCards?:"-",result.strAwayYellowCards?:"-",result.strAwayLineupForward?:"-",
+                                result.strAwayLineupGoalkeeper?:"-",
+                                "${result.strAwayFormation ?:"-"}","${result.strHomeFormation?:"-"}",
+                                result.strHomeGoalDetails?:"-",result.strHomeLineupForward?:"-",
+                                result.strHomeLineupGoalkeeper?:"-",result.strHomeRedCards?:"-",
+                                result.strHomeYellowCards?:"-")
+                        }
+
                     }
                 }
             }
@@ -167,7 +176,7 @@ class RemoteRepository {
                 ) {
                     response.body()?.let {
                         val result = it.teams[0]
-                        team.value = Team(result.strTeamBadge)
+                        team.value = Team(result.strTeamBadge,result.strTeamBadge,result.strCountry,result.strDescriptionEN,result.strFacebook,result.strGender,result.strInstagram,result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube,result.strTwitter)
                     }
                 }
             }
@@ -200,5 +209,63 @@ class RemoteRepository {
             }
         )
         return matches
+    }
+
+    fun getLeagueStandings(id: Int):LiveData<UiState<List<Standings>>>{
+        val standings = MutableLiveData<UiState<List<Standings>>>()
+        standings.value = UiState.Loading(true)
+        apiClient.getLeagueStandings("$id").enqueue(
+            object : Callback<StandingsResponse>{
+                override fun onFailure(call: Call<StandingsResponse>, t: Throwable) {
+                    standings.value = UiState.Error(t)
+                    Log.d("getLeagueStandings",t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<StandingsResponse>,
+                    response: Response<StandingsResponse>
+                ) {
+                    response.body()?.let {
+                        val result = it.table
+                        val mapResult = result.map { standings->
+                            Standings(standings.draw,standings.goalsfor,standings.loss,standings.name,standings.played,standings.teamid,standings.total,standings.win)
+                        }
+                        Log.d("getLeagueStandings","disini")
+                        standings.value = UiState.Success(mapResult)
+                    }
+                }
+
+            }
+        )
+
+        return standings
+    }
+
+    fun getLeagueTeams(id:Int):LiveData<UiState<List<Team>>>{
+        val teams = MutableLiveData<UiState<List<Team>>>()
+        teams.value = UiState.Loading(true)
+        apiClient.getLeagueTeams("$id").enqueue(
+            object : Callback<DetailTeamResponse>{
+                override fun onFailure(call: Call<DetailTeamResponse>, t: Throwable) {
+                    teams.value = UiState.Error(t)
+                    Log.d("getLeagueTeams",t.toString())
+                }
+                override fun onResponse(
+                    call: Call<DetailTeamResponse>,
+                    response: Response<DetailTeamResponse>
+                ) {
+                    response.body()?.let {
+                        val res = it.teams
+                        val mapResult = res.map { result->
+                            Team(result.strTeamBadge,result.strTeamBadge,result.strCountry,result.strDescriptionEN,result.strFacebook,result.strGender,result.strInstagram,
+                                result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,
+                                result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube,result.strTwitter)
+                        }
+                        teams.value = UiState.Success(mapResult)
+                    }
+                }
+            }
+        )
+        return teams
     }
 }

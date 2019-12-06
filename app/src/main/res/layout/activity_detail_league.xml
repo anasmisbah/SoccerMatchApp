@@ -51,21 +51,21 @@
                             android:id="@+id/detail_league_img_banner"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="8dp"
+                            app:layout_constraintBottom_toTopOf="@+id/textView5"
                             app:layout_constraintEnd_toStartOf="@+id/detail_league_img_trophy"
                             app:layout_constraintStart_toEndOf="@+id/detail_league_img_logo"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_tv_since"
                             app:srcCompat="@drawable/ic_broken_image_black" />
 
                         <TextView
                             android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/detail_info_banner"
                             android:textColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/detail_league_img_banner"
-                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_banner"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_img_banner" />
+                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_banner" />
 
                         <TextView
                             android:id="@+id/detail_league_tv_since"
@@ -114,11 +114,12 @@
                             android:id="@+id/textView4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/detail_info_logo"
                             android:textColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/detail_league_img_logo"
-                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_logo"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_img_logo" />
+                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_logo" />
 
                         <ImageView
                             android:transitionName="sharedName"
@@ -135,21 +136,21 @@
                             android:id="@+id/detail_league_img_trophy"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="32dp"
+                            app:layout_constraintBottom_toTopOf="@+id/textView6"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_tv_since"
                             app:srcCompat="@drawable/ic_broken_image_black" />
 
                         <TextView
                             android:id="@+id/textView6"
-                            android:layout_width="44dp"
-                            android:layout_height="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/detail_info_trophy"
                             android:textColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/detail_league_img_trophy"
-                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_trophy"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_img_trophy" />
+                            app:layout_constraintStart_toStartOf="@+id/detail_league_img_trophy" />
 
                         <ImageView
 
@@ -157,9 +158,8 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="32dp"
-                            android:layout_marginTop="8dp"
+                            app:layout_constraintBottom_toTopOf="@+id/textView4"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/detail_league_tv_since"
                             app:srcCompat="@drawable/ic_broken_image_black" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
