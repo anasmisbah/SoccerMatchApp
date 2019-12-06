@@ -1,5 +1,6 @@
 package com.example.soccermatch.ui.team
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class TeamAdapter internal constructor(
 
     class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(team: Team,listener: (Team,ImageView) -> Unit) = with(itemView){
+            Log.d("TeamViewHolder",team.strTeam)
             GlideApp.with(this)
                 .load(team.strTeamBadge)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))

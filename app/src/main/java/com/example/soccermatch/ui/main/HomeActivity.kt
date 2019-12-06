@@ -15,6 +15,7 @@ import com.example.soccermatch.ui.league.DetailLeagueActivity
 import com.example.soccermatch.ui.main.favorite.FavoriteFragment
 import com.example.soccermatch.ui.main.league.LeagueFragment
 import com.example.soccermatch.ui.match.search.SearchMatchActivity
+import com.example.soccermatch.ui.team.favorite.TeamFavoriteFragment
 import com.example.soccermatch.utils.EXTRA_LEAGUE
 import com.example.soccermatch.utils.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_home.*
@@ -35,7 +36,9 @@ class HomeActivity : AppCompatActivity() {
                 R.id.favorites ->{
                     loadFavoritesFragment(savedInstanceState)
                 }
-
+                R.id.favorites_team->{
+                    loadFavoritesTeamFragment(savedInstanceState)
+                }
             }
             true
         }
@@ -56,6 +59,15 @@ class HomeActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.bottom_layout, FavoriteFragment(), FavoriteFragment::class.java.simpleName)
+                .commit()
+        }
+    }
+
+    private fun loadFavoritesTeamFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.bottom_layout, TeamFavoriteFragment(), TeamFavoriteFragment::class.java.simpleName)
                 .commit()
         }
     }

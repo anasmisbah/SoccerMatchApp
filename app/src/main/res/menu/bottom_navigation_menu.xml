@@ -14,4 +14,10 @@
         android:icon="@drawable/ic_favorites"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/favorites_team"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorites"
+        android:title="@string/favorite_team"
+        app:showAsAction="ifRoom" />
 </menu>

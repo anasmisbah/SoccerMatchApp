@@ -126,4 +126,70 @@ class SoccerRepository(
     override fun searchTeams(dataSearch: String): LiveData<UiState<List<Team>>> {
         return remoteRepository.searchTeams(dataSearch)
     }
+
+    override fun getFavoriteTeams(): LiveData<UiState<List<Team>>> {
+        val favoriteTeams = MutableLiveData<UiState<List<Team>>>()
+        favoriteTeams.value = UiState.Loading(true)
+        myDatabaseOpenHelper.use {
+            val result = select(Team.TABLE_TEAM_FAVORITE)
+            val tempFavorite = result.parseList(classParser<Team>())
+            favoriteTeams.value = UiState.Success(tempFavorite)
+        }
+
+        return favoriteTeams
+    }
+
+    override fun addFavoriteTeam(team: Team): Boolean {
+        try {
+            myDatabaseOpenHelper.use {
+                insert( Team.TABLE_TEAM_FAVORITE,
+                    Team.TEAM_ID to team.idTeam,
+                    Team.TEAM_BADGE to team.strTeamBadge,
+                    Team.TEAM_COUNTRY to team.strCountry,
+                    Team.TEAM_DESCRIPTION to team.strDescriptionEN,
+                    Team.TEAM_FACEBOOK to team.strFacebook,
+                    Team.TEAM_GENDER to team.strGender,
+                    Team.TEAM_INSTAGRAM to team.strInstagram,
+                    Team.TEAM_STADIUM_THUMB to team.strStadiumThumb,
+                    Team.TEAM_NAME to team.strTeam,
+                    Team.TEAM_BANNER to team.strTeamBanner,
+                    Team.TEAM_FANART1 to team.strTeamFanart1,
+                    Team.TEAM_FANART2 to team.strTeamFanart2,
+                    Team.TEAM_FANART3 to team.strTeamFanart3,
+                    Team.TEAM_FANART4 to team.strTeamFanart4,
+                    Team.TEAM_JERSEY to team.strTeamJersey,
+                    Team.TEAM_LOGO to team.strTeamLogo,
+                    Team.TEAM_YOUTUBE to team.strYoutube,
+                    Team.TEAM_TWITTER to team.strTwitter)
+
+            }
+            return true
+        }catch (e: SQLiteConstraintException){
+            return false
+        }
+    }
+
+    override fun removeFavoriteTeam(team: Team): Boolean {
+        try {
+            myDatabaseOpenHelper.use {
+                delete(Team.TABLE_TEAM_FAVORITE,"(TEAM_ID = {id})", "id" to team.idTeam)
+            }
+            return true
+        }catch (e: SQLiteConstraintException){
+            return false
+        }
+    }
+
+    override fun favoriteTeamState(team: Team): Boolean {
+        var isFavorite = false
+        myDatabaseOpenHelper.use {
+            val result = select(Team.TABLE_TEAM_FAVORITE)
+                .whereArgs("(TEAM_ID = {id})",
+                    "id" to team.idTeam)
+            val favorite = result.parseList(classParser<Team>())
+            if (favorite.isNotEmpty()) isFavorite = true
+        }
+
+        return isFavorite
+    }
 }

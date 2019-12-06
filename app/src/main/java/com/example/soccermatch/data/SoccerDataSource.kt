@@ -50,4 +50,16 @@ interface SoccerDataSource {
 
     //untuk halaman search team
     fun searchTeams(dataSearch:String):LiveData<UiState<List<Team>>>
+
+    //untuk halaman favorite team
+    fun getFavoriteTeams(): LiveData<UiState<List<Team>>>
+
+    //untuk detail team, add favorite
+    fun addFavoriteTeam(team: Team):Boolean
+
+    //untuk detail team, remove favorite
+    fun removeFavoriteTeam(team: Team):Boolean
+
+    //untuk detail team, check favorite
+    fun favoriteTeamState(team: Team):Boolean
 }
