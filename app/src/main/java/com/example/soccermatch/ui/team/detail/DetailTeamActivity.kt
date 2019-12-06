@@ -5,11 +5,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.soccermatch.R
 import com.example.soccermatch.data.local.entity.League
 import com.example.soccermatch.data.local.entity.Team
+import com.example.soccermatch.ui.team.search.SearchTeamActivity
 import com.example.soccermatch.utils.EXTRA_LEAGUE
 import com.example.soccermatch.utils.EXTRA_TEAM
 import com.example.soccermatch.utils.GlideApp
@@ -107,6 +109,17 @@ class DetailTeamActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_search_favorite ->{
+                startActivity(Intent(this, SearchTeamActivity::class.java))
+            }
+            R.id.add_to_favorite ->{
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

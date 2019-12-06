@@ -8,6 +8,7 @@ import com.example.soccermatch.di.Injection
 import com.example.soccermatch.ui.league.DetailLeagueViewModel
 import com.example.soccermatch.ui.main.HomeViewModel
 import com.example.soccermatch.ui.match.MatchViewModel
+import com.example.soccermatch.ui.team.TeamViewModel
 
 class ViewModelFactory(private val soccerRepository: SoccerRepository): ViewModelProvider.NewInstanceFactory(){
     companion object{
@@ -30,6 +31,8 @@ class ViewModelFactory(private val soccerRepository: SoccerRepository): ViewMode
             return DetailLeagueViewModel(soccerRepository) as T
         }else if (modelClass.isAssignableFrom(MatchViewModel::class.java)){
             return MatchViewModel(soccerRepository) as T
+        }else if (modelClass.isAssignableFrom(TeamViewModel::class.java)){
+            return TeamViewModel(soccerRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

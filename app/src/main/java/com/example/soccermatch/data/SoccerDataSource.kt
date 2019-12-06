@@ -47,4 +47,7 @@ interface SoccerDataSource {
 
     //untuk halaman team league
     fun getLeagueTeams(leagueId: Int):LiveData<UiState<List<Team>>>
+
+    //untuk halaman search team
+    fun searchTeams(dataSearch:String):LiveData<UiState<List<Team>>>
 }

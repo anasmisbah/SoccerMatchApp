@@ -19,6 +19,7 @@ import com.example.soccermatch.data.UiState
 import com.example.soccermatch.ui.league.DetailLeagueViewModel
 import com.example.soccermatch.ui.team.TeamAdapter
 import com.example.soccermatch.ui.team.detail.DetailTeamActivity
+import com.example.soccermatch.ui.team.search.SearchTeamActivity
 import com.example.soccermatch.utils.EXTRA_TEAM
 import com.example.soccermatch.utils.ViewModelFactory
 import com.example.soccermatch.utils.invisible
@@ -91,6 +92,11 @@ class TeamFragment : Fragment() {
                 }
             }
         })
+
+        fab_search_team.setOnClickListener {
+            val searchIntent = Intent(this.context,SearchTeamActivity::class.java)
+            startActivity(searchIntent)
+        }
     }
 
 

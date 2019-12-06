@@ -49,7 +49,7 @@ class SearchMatchActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.action_search)
         searchItem?.expandActionView()
         val searchView = searchItem?.actionView as SearchView
-        searchView.queryHint = "search.."
+        searchView.queryHint = "search match.."
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.searchMatch(query?:"").observe(this@SearchMatchActivity, Observer {

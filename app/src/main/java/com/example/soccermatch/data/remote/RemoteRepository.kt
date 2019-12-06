@@ -175,8 +175,13 @@ class RemoteRepository {
                     response: Response<DetailTeamResponse>
                 ) {
                     response.body()?.let {
-                        val result = it.teams[0]
-                        team.value = Team(result.strTeamBadge,result.strTeamBadge,result.strCountry,result.strDescriptionEN,result.strFacebook,result.strGender,result.strInstagram,result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube,result.strTwitter)
+
+                        it.teams?.let {list->
+                            val result = list[0]
+                            team.value = Team(result.strTeamBadge?:"",result.strTeamBadge?:"",result.strCountry,result.strDescriptionEN?:"",
+                                result.strFacebook?:"",result.strGender,result.strInstagram,result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,
+                                result.strTeamFanart2,result.strTeamFanart3,result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube?:"",result.strTwitter?:"")
+                        }
                     }
                 }
             }
@@ -255,11 +260,43 @@ class RemoteRepository {
                     response: Response<DetailTeamResponse>
                 ) {
                     response.body()?.let {
-                        val res = it.teams
-                        val mapResult = res.map { result->
-                            Team(result.strTeamBadge,result.strTeamBadge,result.strCountry,result.strDescriptionEN,result.strFacebook,result.strGender,result.strInstagram,
-                                result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,
-                                result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube,result.strTwitter)
+                        it.teams?.let {list->
+                            val mapResult = list.map { result->
+                                Team(result.strTeamBadge?:"",result.strTeamBadge?:"",result.strCountry,result.strDescriptionEN?:"",result.strFacebook?:"",result.strGender,result.strInstagram,
+                                    result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,
+                                    result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube?:"",result.strTwitter?:"")
+                            }
+                            teams.value = UiState.Success(mapResult)
+                        }
+                    }
+                }
+            }
+        )
+        return teams
+    }
+
+    fun searchTeams(dataSearch:String):LiveData<UiState<List<Team>>>{
+        val teams = MutableLiveData<UiState<List<Team>>>()
+        teams.value = UiState.Loading(true)
+        apiClient.searchTeam(dataSearch).enqueue(
+            object : Callback<DetailTeamResponse>{
+                override fun onFailure(call: Call<DetailTeamResponse>, t: Throwable) {
+                    teams.value = UiState.Error(t)
+                    Log.d("searchTeams",t.toString())
+                }
+                override fun onResponse(
+                    call: Call<DetailTeamResponse>,
+                    response: Response<DetailTeamResponse>
+                ) {
+                    response.body()?.let {
+                        var mapResult = emptyList<Team>()
+                        it.teams?.let {list ->
+                             mapResult = list.map { result->
+                                Team(result.strTeamBadge?:"",result.strTeamBadge?:"",result.strCountry,result.strDescriptionEN?:"",result.strFacebook?:"",result.strGender,result.strInstagram,
+                                    result.strStadiumThumb,result.strTeam,result.strTeamBanner,result.strTeamFanart1,result.strTeamFanart2,result.strTeamFanart3,
+                                    result.strTeamFanart4,result.strTeamJersey,result.strTeamLogo,result.strYoutube?:"",result.strTwitter?:"")
+                            }
+
                         }
                         teams.value = UiState.Success(mapResult)
                     }

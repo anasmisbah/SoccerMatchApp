@@ -122,4 +122,8 @@ class SoccerRepository(
     override fun getLeagueTeams(leagueId: Int): LiveData<UiState<List<Team>>> {
         return remoteRepository.getLeagueTeams(leagueId)
     }
+
+    override fun searchTeams(dataSearch: String): LiveData<UiState<List<Team>>> {
+        return remoteRepository.searchTeams(dataSearch)
+    }
 }
